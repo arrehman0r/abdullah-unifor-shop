@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=1280">
+<title>Abdullah Uniform</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{
+  --sb:#1C2442;--sbh:#252D52;--sba:rgba(245,158,11,.13);--sbab:#F59E0B;
+  --acc:#F59E0B;--accd:#D97706;--pri:#4F46E5;--prih:#4338CA;--pril:#EEF2FF;
+  --bg:#F2F1EE;--sur:#FFFFFF;--bdr:#E4E2DA;--bdrl:#EEECE5;
+  --t1:#0F172A;--t2:#475569;--t3:#94A3B8;
+  --ok:#10B981;--okl:#ECFDF5;--er:#EF4444;--erl:#FEF2F2;
+  --wa:#F59E0B;--wal:#FFFBEB;--inf:#3B82F6;--infl:#EFF6FF;
+  --rad:10px;--rads:6px;--sh:0 1px 3px rgba(0,0,0,.06);--shm:0 4px 12px rgba(0,0,0,.08);
+  --fw:'Bricolage Grotesque',sans-serif;--fb:'Outfit',sans-serif;
+  --sw:238px;--th:60px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--fb);background:var(--bg);color:var(--t1);font-size:14px;min-width:1280px}
+#app{display:flex;height:100vh;overflow:hidden}
+
+/* SIDEBAR */
+aside{width:var(--sw);background:var(--sb);display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto;overflow-x:hidden}
+.sl{padding:16px 18px 14px;border-bottom:1px solid rgba(255,255,255,.06)}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-ic{width:36px;height:36px;background:var(--acc);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--fw);font-weight:700;font-size:13px;color:#fff;flex-shrink:0}
+.logo-tx{font-family:var(--fw);font-weight:700;font-size:13.5px;color:#fff;line-height:1.25}
+.logo-sub{font-size:10px;color:rgba(255,255,255,.32);letter-spacing:.3px}
+.ns{padding:7px 0}
+.nl{font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:rgba(255,255,255,.26);padding:5px 18px 2px;font-weight:500}
+.ni{display:flex;align-items:center;gap:10px;padding:9px 18px;color:rgba(255,255,255,.55);cursor:pointer;border-left:2.5px solid transparent;transition:all .12s;font-size:13px;user-select:none}
+.ni:hover{background:var(--sbh);color:rgba(255,255,255,.88)}
+.ni.active{background:var(--sba);color:var(--sbab);border-left-color:var(--sbab);font-weight:500}
+.ni i{width:18px;text-align:center;font-size:14px;flex-shrink:0}
+.nbadge{margin-left:auto;background:var(--er);color:#fff;font-size:10px;font-weight:600;padding:1px 6px;border-radius:10px}
+.nbadge.w{background:var(--wa);color:var(--sb)}
+.sf{margin-top:auto;padding:12px 18px;border-top:1px solid rgba(255,255,255,.06)}
+.uc{display:flex;align-items:center;gap:9px}
+.uav{width:32px;height:32px;border-radius:50%;background:var(--pri);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0}
+.uname{font-size:12.5px;color:rgba(255,255,255,.85);font-weight:500}
+.urole{font-size:10.5px;color:rgba(255,255,255,.3)}
+
+/* MAIN */
+.main-w{flex:1;display:flex;flex-direction:column;overflow:hidden}
+#topbar{height:var(--th);background:var(--sur);border-bottom:1px solid var(--bdr);display:flex;align-items:center;padding:0 22px;gap:10px;flex-shrink:0}
+.ptitle{font-family:var(--fw);font-size:17px;font-weight:600;flex:1}
+.tbr{display:flex;align-items:center;gap:8px}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:var(--rads);font-family:var(--fb);font-size:13px;font-weight:500;cursor:pointer;border:none;transition:all .12s;white-space:nowrap}
+.bp{background:var(--pri);color:#fff}.bp:hover{background:var(--prih)}
+.ba{background:var(--acc);color:#fff}.ba:hover{background:var(--accd)}
+.bo{background:transparent;color:var(--t2);border:1px solid var(--bdr)}.bo:hover{background:var(--bg)}
+.ibtn{width:36px;height:36px;border-radius:var(--rads);display:flex;align-items:center;justify-content:center;cursor:pointer;border:1px solid var(--bdr);background:transparent;color:var(--t2);transition:all .12s;font-size:14px}.ibtn:hover{background:var(--bg)}
+#content{flex:1;overflow-y:auto;padding:20px}
+.scr{display:none}.scr.active{display:block}
+
+/* CARDS */
+.card{background:var(--sur);border-radius:var(--rad);border:1px solid var(--bdr);box-shadow:var(--sh)}
+.ch{padding:13px 18px;border-bottom:1px solid var(--bdrl);display:flex;align-items:center;justify-content:space-between;gap:10px}
+.ct{font-family:var(--fw);font-size:13.5px;font-weight:600;color:var(--t1)}
+.cb{padding:18px}
+
+/* STATS */
+.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+.sc{background:var(--sur);border-radius:var(--rad);border:1px solid var(--bdr);padding:15px 18px;box-shadow:var(--sh)}
+.sir{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.si{width:32px;height:32px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px}
+.sl2{font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;font-weight:500}
+.sv{font-family:var(--fw);font-size:22px;font-weight:700;color:var(--t1);line-height:1;margin-bottom:4px}
+.sc2{font-size:11.5px;font-weight:500;display:flex;align-items:center;gap:3px}
+.up{color:var(--ok)}.dn{color:var(--er)}
+
+/* TABLES */
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead th{text-align:left;padding:9px 13px;font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--t3);border-bottom:1px solid var(--bdr);background:#FAFAF8;white-space:nowrap}
+tbody td{padding:10px 13px;border-bottom:1px solid var(--bdrl);color:var(--t2)}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#FAFAF8}
+.tdp{color:var(--t1)!important;font-weight:500}
+.tdr{text-align:right}.tdc{text-align:center}
+.tdn{font-variant-numeric:tabular-nums;font-weight:500}
+.lr{background:#FFF8F8!important}.lr td{color:#B91C1C!important}.lr .tdp{color:#991B1B!important}
+
+/* BADGES */
+.badge{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500;white-space:nowrap}
+.bok{background:var(--okl);color:#059669}.ber{background:var(--erl);color:#DC2626}
+.bwa{background:var(--wal);color:#D97706}.bin{background:var(--infl);color:#2563EB}
+.bgr{background:#F1F0EC;color:#6B7280}.bpu{background:#F3F0FF;color:#7C3AED}
+
+/* SEARCH */
+.sb2{display:flex;align-items:center;gap:8px;background:var(--bg);border:1px solid var(--bdr);border-radius:var(--rads);padding:7px 12px}
+.sb2 i{color:var(--t3);font-size:13px}
+.sb2 input{background:none;border:none;outline:none;font-family:var(--fb);font-size:13px;color:var(--t1);min-width:0}
+.sb2 input::placeholder{color:var(--t3)}
+
+/* FILTERS */
+.fb{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.fs{padding:7px 10px;border:1px solid var(--bdr);border-radius:var(--rads);font-family:var(--fb);font-size:12.5px;color:var(--t2);background:var(--sur);outline:none;cursor:pointer}
+
+/* MISC */
+.prw{height:5px;background:var(--bg);border-radius:10px;overflow:hidden}.prb{height:100%;border-radius:10px}
+hr{border:none;border-top:1px solid var(--bdr);margin:10px 0}
+.tag{display:inline-flex;padding:2px 7px;border-radius:4px;font-size:10.5px;font-weight:500;background:var(--bg);color:var(--t2);border:1px solid var(--bdr)}
+.ml{margin-left:auto}.mt16{margin-top:16px}.mt20{margin-top:20px}.w100{width:100%}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:13px}
+.stitle{font-size:11px;font-weight:600;color:var(--t3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px}
+.pag{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-top:1px solid var(--bdrl)}
+.pagi{font-size:11.5px;color:var(--t3)}.pagb{display:flex;gap:3px}
+.pb{width:27px;height:27px;border-radius:5px;border:1px solid var(--bdr);background:transparent;font-size:11.5px;font-family:var(--fb);cursor:pointer;color:var(--t2);display:flex;align-items:center;justify-content:center;transition:all .12s}
+.pb.a{background:var(--pri);color:#fff;border-color:var(--pri)}.pb:hover:not(.a){background:var(--bg)}
+.fg{margin-bottom:13px}
+.fl{display:block;font-size:12px;font-weight:500;color:var(--t2);margin-bottom:4px}
+.fc{width:100%;padding:8px 11px;border:1px solid var(--bdr);border-radius:var(--rads);font-family:var(--fb);font-size:13px;color:var(--t1);background:var(--sur);outline:none;transition:border-color .12s}
+.fc:focus{border-color:var(--pri);box-shadow:0 0 0 3px rgba(79,70,229,.08)}
+
+/* ===== LOGIN ===== */
+#login{position:fixed;inset:0;background:linear-gradient(135deg,#1C2442,#252D52 55%,#1A2040);z-index:200;display:flex;align-items:center;justify-content:center}
+.lbox{background:#fff;border-radius:16px;padding:38px;width:400px;box-shadow:0 25px 60px rgba(0,0,0,.4)}
+.llogo{display:flex;align-items:center;gap:12px;margin-bottom:26px}
+.lli{width:46px;height:46px;background:var(--acc);border-radius:11px;display:flex;align-items:center;justify-content:center;font-family:var(--fw);font-weight:700;font-size:17px;color:#fff}
+.llt{font-family:var(--fw);font-weight:700;font-size:20px;color:var(--t1)}
+.lls{font-size:11.5px;color:var(--t3)}
+.lh{font-family:var(--fw);font-size:19px;font-weight:600;color:var(--t1);margin-bottom:4px}
+.lsb{font-size:13px;color:var(--t3);margin-bottom:20px}
+.rp{display:flex;gap:7px;margin-bottom:18px}
+.rpi{flex:1;padding:9px 5px;border:1.5px solid var(--bdr);border-radius:8px;text-align:center;cursor:pointer;font-size:11.5px;font-weight:500;color:var(--t2);transition:all .12s}
+.rpi.a{border-color:var(--pri);background:var(--pril);color:var(--pri)}
+.rpi i{display:block;font-size:19px;margin-bottom:3px}
+.lbtn{width:100%;padding:12px;background:var(--pri);color:#fff;border:none;border-radius:8px;font-family:var(--fb);font-size:14px;font-weight:600;cursor:pointer;margin-top:8px}
+.lbtn:hover{background:var(--prih)}
+
+/* ===== POS ===== */
+.pos-layout{display:grid;grid-template-columns:1fr 368px;gap:16px;height:calc(100vh - var(--th) - 40px)}
+.pos-left{display:flex;flex-direction:column;gap:10px;min-height:0}
+
+/* Barcode bar */
+.scan-bar{background:var(--sur);border:1.5px dashed var(--pri);border-radius:var(--rad);padding:10px 16px;display:flex;align-items:center;gap:12px;flex-shrink:0}
+.scan-bar i.fa-barcode{color:var(--pri);font-size:22px;flex-shrink:0}
+.scan-bar input{flex:1;border:none;outline:none;font-family:var(--fb);font-size:13.5px;color:var(--t1);background:transparent}
+.scan-bar input::placeholder{color:var(--t3)}
+.scan-hint{font-size:11.5px;color:var(--t3);white-space:nowrap;display:flex;align-items:center;gap:5px}
+
+/* School tabs */
+.stabs{display:flex;gap:5px;overflow-x:auto;padding-bottom:1px;flex-shrink:0}
+.stab{padding:6px 13px;border-radius:20px;border:1.5px solid var(--bdr);background:var(--sur);font-size:12px;font-weight:500;color:var(--t2);cursor:pointer;white-space:nowrap;transition:all .12s}
+.stab:hover{border-color:var(--pri);color:var(--pri)}
+.stab.active{background:var(--pri);border-color:var(--pri);color:#fff}
+
+/* Product grid */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:9px;overflow-y:auto;padding:2px 2px 4px;flex:1;min-height:0;align-content:start}
+.pcard{background:var(--sur);border:1.5px solid var(--bdr);border-radius:var(--rad);padding:11px 9px;box-shadow:var(--sh);transition:all .12s;cursor:pointer;}
+.pcard:hover{border-color:var(--pri);box-shadow:0 0 0 2px rgba(79,70,229,.09)}
+.pei{width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:19px;margin:0 auto 7px; background:var(--bg)}
+.pna{font-size:11.5px;font-weight:600;color:var(--t1);text-align:center;margin-bottom:2px;line-height:1.3}
+.psc{font-size:10px;text-align:center;margin-bottom:5px;font-weight:500}
+.ppr{font-size:13px;font-weight:700;color:var(--pri);text-align:center;margin-bottom:7px}
+.szb{display:flex;flex-wrap:wrap;gap:3px;justify-content:center}
+.sz{padding:2px 6px;border-radius:4px;border:1px solid var(--bdr);background:var(--bg);font-size:10.5px;font-weight:500;color:var(--t2);cursor:pointer;transition:all .1s}
+.sz:hover{background:var(--pri);color:#fff;border-color:var(--pri)}
+
+/* Cart */
+.cart-panel{background:var(--sur);border:1px solid var(--bdr);border-radius:var(--rad);display:flex;flex-direction:column;overflow:hidden;box-shadow:var(--shm)}
+.cart-top{padding:11px 14px;border-bottom:1px solid var(--bdrl);flex-shrink:0}
+.cart-trow{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.cart-title{font-family:var(--fw);font-size:13.5px;font-weight:600;display:flex;align-items:center;gap:7px}
+.inv-num{font-size:11px;color:var(--t3);font-family:monospace}
+.held-row{display:flex;gap:5px;overflow-x:auto}
+.hpill{display:flex;align-items:center;gap:4px;padding:4px 10px;border-radius:20px;border:1.5px solid var(--bdr);background:var(--bg);font-size:11px;font-weight:500;color:var(--t2);cursor:pointer;white-space:nowrap;transition:all .12s;flex-shrink:0}
+.hpill:hover{border-color:var(--wa);color:var(--wa)}
+.hpill.new{border-color:var(--ok);color:var(--ok);border-style:dashed}
+.hpill.new:hover{background:var(--okl)}
+.cart-cust{padding:7px 14px;border-bottom:1px solid var(--bdrl);flex-shrink:0}
+.cart-items{flex:1;overflow-y:auto;padding:6px 12px}
+.ci{display:flex;align-items:center;gap:7px;padding:7px 0;border-bottom:1px solid var(--bdrl)}
+.ci:last-child{border-bottom:none}
+.ci-em{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;background:var(--bg)}
+.ci-inf{flex:1;min-width:0}
+.ci-n{font-size:12px;font-weight:500;color:var(--t1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ci-s{font-size:10.5px;color:var(--t3)}
+.qc{display:flex;align-items:center;gap:4px}
+.qb{width:19px;height:19px;border-radius:50%;border:1px solid var(--bdr);background:var(--bg);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;color:var(--t2);font-weight:600}
+.qn{font-size:12px;font-weight:600;min-width:16px;text-align:center}
+.ci-p{font-size:12.5px;font-weight:600;color:var(--t1);min-width:58px;text-align:right;flex-shrink:0}
+.rm-btn{width:17px;height:17px;border-radius:50%;border:none;background:var(--erl);color:var(--er);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:9px;flex-shrink:0}
+.cart-foot{padding:11px 14px;border-top:1px solid var(--bdr);flex-shrink:0}
+.trow{display:flex;justify-content:space-between;padding:2px 0;font-size:12.5px;color:var(--t2)}
+.trow.grand{font-size:14.5px;font-weight:700;color:var(--t1);border-top:1px solid var(--bdr);margin-top:5px;padding-top:7px}
+.pm{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin:9px 0}
+.pmo{border:1.5px solid var(--bdr);border-radius:var(--rads);padding:6px 3px;text-align:center;cursor:pointer;transition:all .12s;font-size:11px;font-weight:500;color:var(--t2)}
+.pmo:hover{border-color:var(--pri);color:var(--pri)}
+.pmo.sel{border-color:var(--pri);background:var(--pril);color:var(--pri)}
+.pmo i{display:block;font-size:17px;margin-bottom:2px}
+.cart-acts{display:flex;flex-direction:column;gap:5px}
+
+/* BARCODE LABEL MODAL */
+.mover{position:fixed;inset:0;background:rgba(15,23,42,.5);z-index:100;display:flex;align-items:center;justify-content:center}
+.mover.hidden{display:none}
+.modal{background:var(--sur);border-radius:12px;box-shadow:0 20px 50px rgba(0,0,0,.25);width: 500px;}
+.mh{padding:15px 20px;border-bottom:1px solid var(--bdr);display:flex;align-items:center;justify-content:space-between}
+.mt{font-family:var(--fw);font-size:14.5px;font-weight:600}
+.mb{padding:20px}
+.mf{padding:13px 20px;border-top:1px solid var(--bdr);display:flex;justify-content:flex-end;gap:8px}
+.close-x{background:none;border:none;font-size:16px;color:var(--t3);cursor:pointer;padding:4px}
+/* Dash Additions */
+.dg{display:grid;grid-template-columns:1fr 290px;gap:16px}
+.dl{display:flex;flex-direction:column;gap:16px}
+.dr{display:flex;flex-direction:column;gap:16px}
+.bars{display:flex;align-items:flex-end;gap:7px;height:120px;padding:0 4px}
+.bw{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;height:100%;justify-content:flex-end}
+.br{width:100%;border-radius:4px 4px 0 0;min-height:3px;opacity:.85;transition:opacity .15s}
+.br:hover{opacity:1}.br.a{background:var(--acc)!important;opacity:1}
+.blbl{font-size:10.5px;color:var(--t3)}.bval{font-size:10px;color:var(--t2);font-weight:500}
+.ri{display:flex;align-items:center;gap:9px;padding:8px 0;border-bottom:1px solid var(--bdrl)}
+.ri:last-child{border-bottom:none}
+.rn{width:21px;height:21px;border-radius:50%;background:var(--bg);border:1px solid var(--bdr);display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:600;color:var(--t3);flex-shrink:0}
+.rn.tp{background:var(--acc);border-color:var(--acc);color:#fff}
+.ai{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--bdrl)}
+.ai:last-child{border-bottom:none}
+.an{font-size:13px;font-weight:500;color:var(--t1)}.ask{font-size:11px;color:var(--t3)}
+.chip{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600}
+.cr{background:#FEE2E2;color:#B91C1C}.lo{background:#FEF3C7;color:#92400E}
+
+/* P&L */
+.plg{display:grid;grid-template-columns:repeat(5,1fr);gap:11px;margin-bottom:18px}
+.plc{background:var(--sur);border:1px solid var(--bdr);border-radius:var(--rad);padding:13px}
+.pll{font-size:10.5px;color:var(--t3);font-weight:500;text-transform:uppercase;letter-spacing:.4px;margin-bottom:5px}
+.plv{font-family:var(--fw);font-size:19px;font-weight:700;color:var(--t1)}
+.plv.pos{color:var(--ok)}.plv.neg{color:var(--er)}
+
+/* PO Timeline */
+.pot{display:flex;align-items:center;margin-bottom:16px}
+.pots{display:flex;flex-direction:column;align-items:center;gap:4px;flex:1}
+.potd{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;border:2px solid var(--bdr);background:var(--bg);color:var(--t3)}
+.potd.dn{background:var(--ok);border-color:var(--ok);color:#fff}
+.potd.cu{background:var(--pri);border-color:var(--pri);color:#fff}
+.potl{font-size:10.5px;color:var(--t3);font-weight:500}
+.potc{flex:1;height:2px;background:var(--bdr);align-self:flex-start;margin-top:12px}
+.potc.dn{background:var(--ok)}
+
+/* SCHOOLS */
+.skgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}
+.skc{background:var(--sur);border:1px solid var(--bdr);border-radius:var(--rad);padding:15px;cursor:pointer;transition:all .12s;box-shadow:var(--sh)}
+.skc:hover{border-color:var(--pri);transform:translateY(-1px);box-shadow:var(--shm)}
+.ski{width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:10px; background:var(--bg)}
+.skn{font-family:var(--fw);font-size:13.5px;font-weight:600;color:var(--t1);margin-bottom:2px}
+.skm{font-size:11.5px;color:var(--t3);margin-bottom:10px}
+.skst{display:flex;gap:14px;align-items:center}
+.skv{font-size:14px;font-weight:700;color:var(--t1)}.skl{font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.3px}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login">
+  <div class="lbox">
+    <div class="llogo">
+      <div class="lli">AU</div>
+      <div><div class="llt">Abdullah Uniform</div><div class="lls">Shop Management System</div></div>
+    </div>
+    <div class="lh">Welcome back 👋</div>
+    <div class="lsb">Sign in to access your dashboard</div>
+    <div class="rp">
+      <div class="rpi a" onclick="selectRole(this)"><i class="fa-solid fa-briefcase"></i>Owner</div>
+      <div class="rpi" onclick="selectRole(this)"><i class="fa-solid fa-user-tie"></i>Manager</div>
+      <div class="rpi" onclick="selectRole(this)"><i class="fa-solid fa-cash-register"></i>Cashier</div>
+    </div>
+    <div class="fg"><label class="fl">Username</label><input class="fc" value="arslan_arif" type="text"></div>
+    <div class="fg"><label class="fl">Password</label><input class="fc" value="••••••••" type="password"></div>
+    <div style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--t3);margin-bottom:2px">
+      <input type="checkbox" id="rem" checked style="accent-color:var(--pri)"><label for="rem" style="cursor:pointer">Keep me signed in</label>
+      <span style="margin-left:auto;color:var(--pri);cursor:pointer">Forgot password?</span>
+    </div>
+    <button class="lbtn" onclick="showApp()">Sign In to Abdullah Uniform</button>
+    <div style="font-size:10.5px;color:var(--t3);text-align:center;margin-top:14px">v2.5 · Lahore, Pakistan · © 2026 Abdullah Uniform</div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app" style="display:none">
+<aside>
+  <div class="sl">
+    <div class="logo">
+      <div class="logo-ic">AU</div>
+      <div><div class="logo-tx">Abdullah Uniform</div><div class="logo-sub">Management Suite</div></div>
+    </div>
+  </div>
+  <div class="ns">
+    <div class="nl">Main</div>
+    <div class="ni active" data-target="dash" onclick="go('dash', 'Dashboard')"><i class="fa-solid fa-chart-pie"></i> Dashboard</div>
+    <div class="ni" data-target="pos" onclick="go('pos', 'New Sale (POS)')"><i class="fa-solid fa-cash-register"></i> New Sale (POS) <span class="nbadge w" id="heldBadge" style="display:none">0</span></div>
+    <div class="ni" data-target="inv" onclick="go('inv', 'Inventory Management')"><i class="fa-solid fa-box-open"></i> Products <span class="nbadge">3</span></div>
+  </div>
+  <div class="ns">
+    <div class="nl">Operations</div>
+    <div class="ni" data-target="po" onclick="go('po', 'Purchase Orders')"><i class="fa-solid fa-truck"></i> Purchase Orders</div>
+    <div class="ni" data-target="sales" onclick="go('sales', 'Sales History')"><i class="fa-solid fa-receipt"></i> Sales History</div>
+    <div class="ni" data-target="schools" onclick="go('schools', 'School Bulk Orders')"><i class="fa-solid fa-school"></i> School Orders</div>
+  </div>
+  <div class="ns">
+    <div class="nl">Reports</div>
+    <div class="ni" data-target="pl" onclick="go('pl', 'Profit & Loss Report')"><i class="fa-solid fa-chart-bar"></i> P&amp;L Report</div>
+  </div>
+  <div class="ns">
+    <div class="nl">Settings</div>
+    <div class="ni" data-target="users" onclick="go('users', 'User Management')"><i class="fa-solid fa-users"></i> User Management</div>
+  </div>
+  <div class="sf">
+    <div class="uc">
+      <div class="uav">AA</div>
+      <div><div class="uname">Arslan Arif</div><div class="urole">Owner</div></div>
+      <i class="fa-solid fa-chevron-right" style="color:rgba(255,255,255,.2);font-size:12px;margin-left:auto"></i>
+    </div>
+  </div>
+</aside>
+
+<div class="main-w">
+  <div id="topbar">
+    <div class="ptitle" id="pageTitle">Dashboard</div>
+    <div class="tbr">
+      <div class="sb2" style="width:200px"><i class="fa-solid fa-search"></i><input placeholder="Search anything..."></div>
+      <button class="ibtn"><i class="fa-solid fa-bell"></i></button>
+      <button class="btn bp" onclick="go('pos', 'New Sale (POS)')"><i class="fa-solid fa-plus"></i> New Sale</button>
+    </div>
+  </div>
+  
+  <div id="content">
+
+    <!-- DASHBOARD -->
+    <div class="scr active" id="screen-dash">
+      <div class="sg">
+        <div class="sc"><div class="sir"><div class="si" style="background:#EEF2FF"><i class="fa-solid fa-money-bill-wave" style="color:var(--pri)"></i></div><span class="sl2">Today's Sales</span></div><div class="sv">Rs. 52,400</div><div class="sc2 up"><i class="fa-solid fa-arrow-trend-up"></i> +14.2% vs yesterday</div></div>
+        <div class="sc"><div class="sir"><div class="si" style="background:#ECFDF5"><i class="fa-solid fa-chart-line" style="color:var(--ok)"></i></div><span class="sl2">Monthly Revenue</span></div><div class="sv">Rs. 9.2L</div><div class="sc2 up"><i class="fa-solid fa-arrow-trend-up"></i> +9.8% vs last month</div></div>
+        <div class="sc"><div class="sir"><div class="si" style="background:#FEF3C7"><i class="fa-solid fa-coins" style="color:#D97706"></i></div><span class="sl2">Net Profit</span></div><div class="sv">Rs. 2.3L</div><div class="sc2 up"><i class="fa-solid fa-arrow-trend-up"></i> 25.0% margin</div></div>
+        <div class="sc"><div class="sir"><div class="si" style="background:#FEF2F2"><i class="fa-solid fa-file-invoice" style="color:var(--er)"></i></div><span class="sl2">Expenses MTD</span></div><div class="sv">Rs. 1.5L</div><div class="sc2 dn"><i class="fa-solid fa-arrow-trend-up"></i> +3.5% vs last month</div></div>
+      </div>
+      <div class="dg">
+        <div class="dl">
+          <div class="card">
+            <div class="ch"><span class="ct">Sales Trend — Last 7 Days</span><div style="display:flex;gap:7px"><span class="tag">This Week</span><button class="btn bo" style="font-size:12px;padding:5px 9px"><i class="fa-solid fa-download"></i> Export</button></div></div>
+            <div class="cb">
+              <div style="display:flex;justify-content:space-between;margin-bottom:5px"><span style="font-size:11px;color:var(--t3)">Revenue (Rs.)</span><span style="font-size:11px;color:var(--t3)">Total: Rs. 3,08,400</span></div>
+              <div class="bars">
+                <div class="bw"><div class="bval">34K</div><div class="br" style="height:52%;background:var(--pri)"></div><div class="blbl">Mon</div></div>
+                <div class="bw"><div class="bval">29K</div><div class="br" style="height:44%;background:var(--pri)"></div><div class="blbl">Tue</div></div>
+                <div class="bw"><div class="bval">55K</div><div class="br" style="height:84%;background:var(--pri)"></div><div class="blbl">Wed</div></div>
+                <div class="bw"><div class="bval">47K</div><div class="br" style="height:72%;background:var(--pri)"></div><div class="blbl">Thu</div></div>
+                <div class="bw"><div class="bval">41K</div><div class="br" style="height:62%;background:var(--pri)"></div><div class="blbl">Fri</div></div>
+                <div class="bw"><div class="bval">50K</div><div class="br" style="height:76%;background:var(--pri)"></div><div class="blbl">Sat</div></div>
+                <div class="bw"><div class="bval">52K</div><div class="br a" style="height:79%"></div><div class="blbl" style="font-weight:600;color:var(--acc)">Today</div></div>
+              </div>
+              <hr>
+              <div style="display:flex;gap:18px;padding-top:5px">
+                <div><div style="font-size:10.5px;color:var(--t3)">Avg Daily</div><div style="font-weight:600;font-size:13px">Rs. 44,057</div></div>
+                <div><div style="font-size:10.5px;color:var(--t3)">Best Day</div><div style="font-weight:600;font-size:13px">Wednesday</div></div>
+                <div><div style="font-size:10.5px;color:var(--t3)">Transactions</div><div style="font-weight:600;font-size:13px">318 total</div></div>
+                <div style="margin-left:auto"><span class="badge bok"><i class="fa-solid fa-circle-check" style="font-size:10px"></i> On target</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="ch"><span class="ct">Top 5 Selling Products</span><span style="font-size:11.5px;color:var(--t3)">This month</span></div>
+            <div class="cb" style="padding:13px 18px">
+              <div class="ri"><div class="rn tp">1</div><div style="width:34px;height:34px;border-radius:7px;background:#EEF2FF;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0">👕</div><div style="flex:1"><div style="font-size:12.5px;font-weight:500;color:var(--t1)">Beaconhouse Shirt (Blue) — M</div><div style="font-size:10.5px;color:var(--t3)">BHS-SH-B-M</div></div><div style="text-align:right"><div style="font-size:13px;font-weight:600">Rs. 94,500</div><div style="font-size:10.5px;color:var(--t3)">270 units</div></div></div>
+              <div class="ri"><div class="rn">2</div><div style="width:34px;height:34px;border-radius:7px;background:#FEF2F2;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0">👔</div><div style="flex:1"><div style="font-size:12.5px;font-weight:500;color:var(--t1)">APS Trouser (Navy) — L</div><div style="font-size:10.5px;color:var(--t3)">APS-TR-N-L</div></div><div style="text-align:right"><div style="font-size:13px;font-weight:600">Rs. 72,600</div><div style="font-size:10.5px;color:var(--t3)">242 units</div></div></div>
+              <div class="ri"><div class="rn">3</div><div style="width:34px;height:34px;border-radius:7px;background:#F3F0FF;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0">🎒</div><div style="flex:1"><div style="font-size:12.5px;font-weight:500;color:var(--t1)">LGS School Bag — Standard</div><div style="font-size:10.5px;color:var(--t3)">LGS-BAG-S</div></div><div style="text-align:right"><div style="font-size:13px;font-weight:600">Rs. 61,200</div><div style="font-size:10.5px;color:var(--t3)">204 units</div></div></div>
+              <div class="ri"><div class="rn">4</div><div style="width:34px;height:34px;border-radius:7px;background:#ECFDF5;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0">👗</div><div style="flex:1"><div style="font-size:12.5px;font-weight:500;color:var(--t1)">Educators Girls Dress — M</div><div style="font-size:10.5px;color:var(--t3)">EDU-GD-M</div></div><div style="text-align:right"><div style="font-size:13px;font-weight:600">Rs. 44,800</div><div style="font-size:10.5px;color:var(--t3)">179 units</div></div></div>
+              <div class="ri"><div class="rn">5</div><div style="width:34px;height:34px;border-radius:7px;background:#F1F0EC;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0">👟</div><div style="flex:1"><div style="font-size:12.5px;font-weight:500;color:var(--t1)">Black School Shoes — Size 5</div><div style="font-size:10.5px;color:var(--t3)">GEN-SH-5</div></div><div style="text-align:right"><div style="font-size:13px;font-weight:600">Rs. 38,400</div><div style="font-size:10.5px;color:var(--t3)">128 units</div></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="dr">
+          <div class="card" style="border-left:3px solid var(--er)">
+            <div class="ch"><span class="ct" style="display:flex;align-items:center;gap:6px"><i class="fa-solid fa-triangle-exclamation" style="color:var(--er)"></i> Low Stock Alerts</span><span class="badge ber">8 items</span></div>
+            <div class="cb" style="padding:9px 16px">
+              <div class="ai"><div><div class="an">APS Shorts (M)</div><div class="ask">APS-SH-M · Uniforms</div></div><span class="chip cr"><i class="fa-solid fa-fire" style="font-size:9px"></i> 3 left</span></div>
+              <div class="ai"><div><div class="an">BHS Girls Dress (S)</div><div class="ask">BHS-GD-S · Uniforms</div></div><span class="chip cr">2 left</span></div>
+              <div class="ai"><div><div class="an">City School Tie</div><div class="ask">CS-TIE-1 · Accessories</div></div><span class="chip cr">1 left</span></div>
+              <div class="ai"><div><div class="an">LGS Blazer (XL)</div><div class="ask">LGS-BLZ-XL · Uniforms</div></div><span class="chip lo">5 left</span></div>
+              <div class="ai"><div><div class="an">Blue Lunchbox</div><div class="ask">LNX-BLU-1 · Accessories</div></div><span class="chip lo">6 left</span></div>
+              <button class="btn bo w100 mt16" onclick="go('inv', 'Inventory Management')">View All Inventory</button>
+            </div>
+          </div>
+          <div class="card">
+            <div class="ch"><span class="ct">Quick Actions</span></div>
+            <div class="cb" style="padding:12px">
+              <button class="btn bo w100" style="justify-content:center; margin-bottom:8px" onclick="go('pos', 'New Sale (POS)')"><i class="fa-solid fa-plus" style="color:var(--pri)"></i> New Sale</button>
+              <button class="btn bo w100" style="justify-content:center; margin-bottom:8px" onclick="openModal('addProdModal')"><i class="fa-solid fa-box" style="color:var(--ok)"></i> Add Product</button>
+              <button class="btn bo w100" style="justify-content:center" onclick="go('po', 'Purchase Orders')"><i class="fa-solid fa-file-invoice" style="color:var(--wa)"></i> Create PO</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- POS / NEW SALE -->
+    <div class="scr" id="screen-pos">
+      <div class="pos-layout">
+        <div class="pos-left">
+          <div class="scan-bar">
+            <i class="fa-solid fa-barcode"></i>
+            <input type="text" placeholder="Scan barcode or type product name/SKU..." autofocus>
+            <div class="scan-hint"><i class="fa-solid fa-keyboard"></i> Press Enter</div>
+          </div>
+          
+          <div class="stabs">
+            <div class="stab active">All Products</div>
+            <div class="stab">Beaconhouse (BHS)</div>
+            <div class="stab">Army Public (APS)</div>
+            <div class="stab">Lahore Grammar (LGS)</div>
+            <div class="stab">City School (CS)</div>
+            <div class="stab">Accessories</div>
+          </div>
+
+          <div class="pgrid">
+            <!-- Product Cards -->
+            <div class="pcard" onclick="addToCart('BHS Shirt', 'BHS-SH-B-M', 350)">
+              <div class="pei">👕</div>
+              <div class="pna">BHS Shirt (Blue)</div>
+              <div class="psc">Uniforms</div>
+              <div class="ppr">Rs. 350</div>
+              <div class="szb"><span class="sz">S</span><span class="sz" style="background:var(--pri);color:#fff;border-color:var(--pri)">M</span><span class="sz">L</span></div>
+            </div>
+            <div class="pcard" onclick="addToCart('APS Trouser', 'APS-TR-N-L', 300)">
+              <div class="pei">👔</div>
+              <div class="pna">APS Trouser</div>
+              <div class="psc">Uniforms</div>
+              <div class="ppr">Rs. 300</div>
+              <div class="szb"><span class="sz">M</span><span class="sz" style="background:var(--pri);color:#fff;border-color:var(--pri)">L</span><span class="sz">XL</span></div>
+            </div>
+            <div class="pcard" onclick="addToCart('LGS School Bag', 'LGS-BAG-S', 450)">
+              <div class="pei">🎒</div>
+              <div class="pna">LGS School Bag</div>
+              <div class="psc">Bags</div>
+              <div class="ppr">Rs. 450</div>
+            </div>
+            <div class="pcard" onclick="addToCart('Educators Dress', 'EDU-GD-M', 250)">
+              <div class="pei">👗</div>
+              <div class="pna">Educators Dress</div>
+              <div class="psc">Uniforms</div>
+              <div class="ppr">Rs. 250</div>
+              <div class="szb"><span class="sz">S</span><span class="sz" style="background:var(--pri);color:#fff;border-color:var(--pri)">M</span></div>
+            </div>
+            <div class="pcard" onclick="addToCart('Black Shoes', 'GEN-SH-5', 300)">
+              <div class="pei">👟</div>
+              <div class="pna">Black School Shoes</div>
+              <div class="psc">Accessories</div>
+              <div class="ppr">Rs. 300</div>
+              <div class="szb"><span class="sz">4</span><span class="sz" style="background:var(--pri);color:#fff;border-color:var(--pri)">5</span><span class="sz">6</span></div>
+            </div>
+             <div class="pcard" onclick="addToCart('Oxford Blazer', 'OX-BLZ-M', 1200)">
+              <div class="pei">🧥</div>
+              <div class="pna">Oxford Blazer</div>
+              <div class="psc">Uniforms</div>
+              <div class="ppr">Rs. 1,200</div>
+              <div class="szb"><span class="sz">S</span><span class="sz" style="background:var(--pri);color:#fff;border-color:var(--pri)">M</span><span class="sz">L</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cart-panel">
+          <div class="cart-top">
+            <div class="cart-trow">
+              <div class="cart-title"><i class="fa-solid fa-shopping-cart" style="color:var(--pri)"></i> Current Order</div>
+              <div class="inv-num">INV-10024</div>
+            </div>
+            <div class="held-row">
+              <div class="hpill new"><i class="fa-solid fa-plus"></i> Hold</div>
+              <div class="hpill">Order #22</div>
+            </div>
+          </div>
+          
+          <div class="cart-cust">
+            <div class="sb2" style="padding:4px 8px"><i class="fa-solid fa-user"></i><input placeholder="Walk-in Customer..."></div>
+          </div>
+
+          <div class="cart-items" id="cartBody">
+            <!-- Items injected via JS -->
+          </div>
+
+          <div class="cart-foot">
+            <div class="trow"><span>Subtotal</span><span id="cartSub">Rs. 0.00</span></div>
+            <div class="trow"><span>Discount</span><input type="text" placeholder="Rs. or %" style="width:60px;text-align:right;border:1px solid var(--bdr);border-radius:4px;padding:2px 4px;font-family:var(--fb)"></div>
+            <div class="trow grand"><span>Total</span><span id="cartTotal" style="color:var(--acc)">Rs. 0.00</span></div>
+            
+            <div class="pm">
+              <div class="pmo sel"><i class="fa-solid fa-money-bill"></i> Cash</div>
+              <div class="pmo"><i class="fa-solid fa-credit-card"></i> Card</div>
+              <div class="pmo"><i class="fa-solid fa-clock-rotate-left"></i> Credit</div>
+            </div>
+
+            <div class="cart-acts">
+              <button class="btn ba" style="justify-content:center;font-size:14px;padding:10px" onclick="checkout()"><i class="fa-solid fa-check-circle"></i> Generate Invoice</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRODUCTS / INVENTORY -->
+    <div class="scr" id="screen-inv">
+      <div class="card">
+        <div class="ch">
+          <div class="fb" style="margin:0">
+            <select class="fs"><option>All Categories</option><option>Uniforms</option><option>Bags</option><option>Accessories</option></select>
+            <select class="fs"><option>All Schools</option><option>BHS</option><option>APS</option></select>
+            <select class="fs"><option>Stock: All</option><option>Low Stock</option><option>Out of Stock</option></select>
+          </div>
+          <button class="btn ba" onclick="openModal('addProdModal')"><i class="fa-solid fa-plus"></i> Add New Product</button>
+        </div>
+        <div class="tw">
+          <table>
+            <thead>
+              <tr>
+                <th>SKU</th>
+                <th>Product Name</th>
+                <th>Category</th>
+                <th class="tdr">Stock Qty</th>
+                <th class="tdr">Cost Price</th>
+                <th class="tdr">Selling Price</th>
+                <th class="tdr">Margin %</th>
+                <th class="tdc">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="tdn">BHS-SH-B-M</td><td class="tdp">Beaconhouse Shirt (Blue) - M</td><td>Uniforms</td><td class="tdr tdn">45</td><td class="tdr tdn">Rs. 200</td><td class="tdr tdn">Rs. 350</td><td class="tdr tdn">42.8%</td><td class="tdc"><button class="ibtn"><i class="fa-solid fa-pen"></i></button></td></tr>
+              <tr><td class="tdn">APS-TR-N-L</td><td class="tdp">APS Trouser (Navy) - L</td><td>Uniforms</td><td class="tdr tdn">28</td><td class="tdr tdn">Rs. 180</td><td class="tdr tdn">Rs. 300</td><td class="tdr tdn">40.0%</td><td class="tdc"><button class="ibtn"><i class="fa-solid fa-pen"></i></button></td></tr>
+              <tr class="lr"><td class="tdn">APS-SH-M</td><td class="tdp">APS Shorts - M</td><td>Uniforms</td><td class="tdr tdn">3</td><td class="tdr tdn">Rs. 150</td><td class="tdr tdn">Rs. 250</td><td class="tdr tdn">40.0%</td><td class="tdc"><button class="ibtn"><i class="fa-solid fa-pen"></i></button></td></tr>
+              <tr><td class="tdn">LGS-BAG-S</td><td class="tdp">LGS School Bag - Standard</td><td>Bags</td><td class="tdr tdn">15</td><td class="tdr tdn">Rs. 250</td><td class="tdr tdn">Rs. 450</td><td class="tdr tdn">44.4%</td><td class="tdc"><button class="ibtn"><i class="fa-solid fa-pen"></i></button></td></tr>
+              <tr><td class="tdn">GEN-SH-5</td><td class="tdp">Black School Shoes - Size 5</td><td>Accessories</td><td class="tdr tdn">22</td><td class="tdr tdn">Rs. 180</td><td class="tdr tdn">Rs. 300</td><td class="tdr tdn">40.0%</td><td class="tdc"><button class="ibtn"><i class="fa-solid fa-pen"></i></button></td></tr>
+              <tr><td class="tdn">OX-BLZ-M</td><td class="tdp">Oxford Blazer - M</td><td>Uniforms</td><td class="tdr tdn">12</td><td class="tdr tdn">Rs. 800</td><td class="tdr tdn">Rs. 1,200</td><td class="tdr tdn">33.3%</td><td class="tdc"><button class="ibtn"><i class="fa-solid fa-pen"></i></button></td></tr>
+              <tr class="lr"><td class="tdn">BHS-GD-S</td><td class="tdp">BHS Girls Dress - S</td><td>Uniforms</td><td class="tdr tdn">2</td><td class="tdr tdn">Rs. 150</td><td class="tdr tdn">Rs. 250</td><td class="tdr tdn">40.0%</td><td class="tdc"><button class="ibtn"><i class="fa-solid fa-pen"></i></button></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pag">
+          <div class="pagi">Showing 1 to 7 of 142 entries</div>
+          <div class="pagb"><button class="pb"><i class="fa-solid fa-chevron-left"></i></button><button class="pb a">1</button><button class="pb">2</button><button class="pb">3</button><button class="pb"><i class="fa-solid fa-chevron-right"></i></button></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PURCHASE ORDERS -->
+    <div class="scr" id="screen-po">
+      <div class="card">
+        <div class="ch">
+          <div class="fb" style="margin:0">
+            <select class="fs"><option>Status: All</option><option>Draft</option><option>Sent</option><option>Received</option></select>
+          </div>
+          <button class="btn ba"><i class="fa-solid fa-plus"></i> New Purchase Order</button>
+        </div>
+        <div class="tw">
+          <table>
+            <thead>
+              <tr>
+                <th>PO Number</th>
+                <th>Supplier</th>
+                <th>Order Date</th>
+                <th>Expected Delivery</th>
+                <th class="tdr">Total Amount (Rs.)</th>
+                <th class="tdc">Status</th>
+                <th class="tdc">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="tdn">PO-2024-001</td><td class="tdp">Lucky Uniforms Mfg.</td><td>2024-08-15</td><td>2024-08-25</td><td class="tdr tdn">150,000</td><td class="tdc"><span class="badge bok">Received</span></td><td class="tdc"><button class="ibtn"><i class="fa-solid fa-eye"></i></button></td></tr>
+              <tr><td class="tdn">PO-2024-002</td><td class="tdp">Zaman Textile Mills</td><td>2024-08-18</td><td>2024-08-28</td><td class="tdr tdn">85,000</td><td class="tdc"><span class="badge bwa">Sent</span></td><td class="tdc"><button class="ibtn"><i class="fa-solid fa-eye"></i></button></td></tr>
+              <tr><td class="tdn">PO-2024-003</td><td class="tdp">Lahore Bag Traders</td><td>2024-08-20</td><td>2024-08-30</td><td class="tdr tdn">45,500</td><td class="tdc"><span class="badge bgr">Draft</span></td><td class="tdc"><button class="ibtn"><i class="fa-solid fa-pen"></i></button></td></tr>
+              <tr><td class="tdn">PO-2024-004</td><td class="tdp">Lucky Uniforms Mfg.</td><td>2024-09-01</td><td>2024-09-10</td><td class="tdr tdn">210,000</td><td class="tdc"><span class="badge bwa">Sent</span></td><td class="tdc"><button class="ibtn"><i class="fa-solid fa-eye"></i></button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- SALES HISTORY -->
+    <div class="scr" id="screen-sales">
+      <div class="card">
+        <div class="ch">
+          <div class="fb" style="margin:0">
+            <select class="fs"><option>Date Range: Today</option><option>Yesterday</option><option>Last 7 Days</option></select>
+            <select class="fs"><option>Payment: All</option><option>Cash</option><option>Card</option></select>
+          </div>
+        </div>
+        <div class="tw">
+          <table>
+            <thead>
+              <tr>
+                <th>Date & Time</th>
+                <th>Invoice #</th>
+                <th>Customer Name</th>
+                <th>Items Sold</th>
+                <th class="tdr">Total Amount (Rs.)</th>
+                <th class="tdc">Payment Method</th>
+                <th class="tdc">Receipt</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>2024-08-18 14:30</td><td class="tdn">INV-10023</td><td class="tdp">Beaconhouse School (Bulk)</td><td>50x Shirts, 50x Trousers...</td><td class="tdr tdn">85,000</td><td class="tdc"><span class="badge bpu">Credit</span></td><td class="tdc"><button class="ibtn"><i class="fa-solid fa-print"></i></button></td></tr>
+              <tr><td>2024-08-18 12:15</td><td class="tdn">INV-10022</td><td class="tdp">Walk-in Customer</td><td>10x Shirts, 10x Shoes</td><td class="tdr tdn">10,000</td><td class="tdc"><span class="badge bok">Cash</span></td><td class="tdc"><button class="ibtn"><i class="fa-solid fa-print"></i></button></td></tr>
+              <tr><td>2024-08-18 10:05</td><td class="tdn">INV-10021</td><td class="tdp">Mrs. Ali</td><td>2x APS Shirts, 1x Bag</td><td class="tdr tdn">1,150</td><td class="tdc"><span class="badge bin">Card</span></td><td class="tdc"><button class="ibtn"><i class="fa-solid fa-print"></i></button></td></tr>
+              <tr><td>2024-08-17 18:45</td><td class="tdn">INV-10020</td><td class="tdp">Walk-in Customer</td><td>1x Oxford Blazer</td><td class="tdr tdn">1,200</td><td class="tdc"><span class="badge bok">Cash</span></td><td class="tdc"><button class="ibtn"><i class="fa-solid fa-print"></i></button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- P&L REPORT -->
+    <div class="scr" id="screen-pl">
+      <div class="plg">
+        <div class="plc"><div class="pll">Total Revenue</div><div class="plv">Rs. 308,400</div></div>
+        <div class="plc"><div class="pll">Total COGS</div><div class="plv">Rs. 185,040</div></div>
+        <div class="plc"><div class="pll">Gross Profit</div><div class="plv pos">Rs. 123,360</div></div>
+        <div class="plc"><div class="pll">Total Expenses</div><div class="plv neg">Rs. 45,000</div></div>
+        <div class="plc" style="border-color:var(--ok);background:var(--okl)"><div class="pll" style="color:#065F46">Net Profit</div><div class="plv pos" style="color:#065F46">Rs. 78,360</div></div>
+      </div>
+      
+      <div class="dg">
+        <div class="dl">
+          <div class="card">
+            <div class="ch"><span class="ct">Profit & Loss Breakdown (Current Month)</span></div>
+            <div class="cb">
+              <div style="height:300px;display:flex;align-items:flex-end;gap:40px;justify-content:center;padding-bottom:20px;border-bottom:1px solid var(--bdr)">
+                <!-- Fake Chart bars -->
+                <div style="width:80px;height:100%;background:var(--sb);position:relative"><span style="position:absolute;bottom:-25px;width:100%;text-align:center;font-size:12px;color:var(--t2)">Revenue</span></div>
+                <div style="width:80px;height:60%;background:var(--acc);position:relative"><span style="position:absolute;bottom:-25px;width:100%;text-align:center;font-size:12px;color:var(--t2)">COGS</span></div>
+                <div style="width:80px;height:40%;background:#FBBF24;position:relative"><span style="position:absolute;bottom:-25px;width:100%;text-align:center;font-size:12px;color:var(--t2)">Gross Profit</span></div>
+                <div style="width:80px;height:15%;background:var(--er);position:relative"><span style="position:absolute;bottom:-25px;width:100%;text-align:center;font-size:12px;color:var(--t2)">Expenses</span></div>
+                <div style="width:80px;height:25%;background:var(--ok);position:relative"><span style="position:absolute;bottom:-25px;width:100%;text-align:center;font-size:12px;color:var(--t2)">Net Profit</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dr">
+          <div class="card">
+            <div class="ch"><span class="ct">Operating Expenses</span></div>
+            <div class="cb" style="padding:0">
+              <div class="ai" style="padding:12px 18px"><div><div class="an">Shop Rent</div></div><div class="tdn" style="font-weight:600">Rs. 25,000</div></div>
+              <div class="ai" style="padding:12px 18px"><div><div class="an">Staff Salaries</div></div><div class="tdn" style="font-weight:600">Rs. 15,000</div></div>
+              <div class="ai" style="padding:12px 18px"><div><div class="an">Utilities (Electricity)</div></div><div class="tdn" style="font-weight:600">Rs. 3,500</div></div>
+              <div class="ai" style="padding:12px 18px"><div><div class="an">Miscellaneous</div></div><div class="tdn" style="font-weight:600">Rs. 1,500</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCHOOL BULK ORDERS -->
+    <div class="scr" id="screen-schools">
+      <div class="skgrid">
+        <div class="skc skadd">
+          <i class="fa-solid fa-plus"></i>
+          <div style="font-weight:600;color:var(--t2);font-size:14px">Register New School</div>
+          <div style="font-size:11px;margin-top:4px">Add institution details & contracts</div>
+        </div>
+        <div class="skc">
+          <div style="display:flex;justify-content:space-between">
+            <div class="ski">🏫</div>
+            <span class="badge bok">Active</span>
+          </div>
+          <div class="skn">Beaconhouse School System</div>
+          <div class="skm">Johar Town Campus, Lahore</div>
+          <hr>
+          <div class="skst">
+            <div><div class="skl">Total Orders</div><div class="skv">Rs. 4.2M</div></div>
+            <div><div class="skl">Balance</div><div class="skv" style="color:var(--ok)">Rs. 0</div></div>
+          </div>
+        </div>
+        <div class="skc">
+          <div style="display:flex;justify-content:space-between">
+            <div class="ski">🏛️</div>
+            <span class="badge bwa">Pending Payment</span>
+          </div>
+          <div class="skn">Army Public School (APS)</div>
+          <div class="skm">Cantonment Board, Lahore</div>
+          <hr>
+          <div class="skst">
+            <div><div class="skl">Total Orders</div><div class="skv">Rs. 3.1M</div></div>
+            <div><div class="skl">Balance</div><div class="skv" style="color:var(--er)">Rs. 150K</div></div>
+          </div>
+        </div>
+        <div class="skc">
+          <div style="display:flex;justify-content:space-between">
+            <div class="ski">🎓</div>
+            <span class="badge bok">Active</span>
+          </div>
+          <div class="skn">Lahore Grammar School (LGS)</div>
+          <div class="skm">Gulberg Main Branch</div>
+          <hr>
+          <div class="skst">
+            <div><div class="skl">Total Orders</div><div class="skv">Rs. 2.8M</div></div>
+            <div><div class="skl">Balance</div><div class="skv" style="color:var(--ok)">Rs. 0</div></div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="ch">
+          <span class="ct">Recent Bulk Invoices</span>
+          <button class="btn ba">Create Bulk Order</button>
+        </div>
+        <div class="tw">
+          <table>
+             <thead>
+              <tr>
+                <th>Date</th>
+                <th>School Name</th>
+                <th>Contact Person</th>
+                <th class="tdr">Amount (Rs.)</th>
+                <th class="tdc">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>2024-07-10</td><td class="tdp">Beaconhouse School System</td><td>Mr. Khan</td><td class="tdr tdn">750,000</td><td class="tdc"><span class="badge bok">Paid</span></td></tr>
+              <tr><td>2024-08-01</td><td class="tdp">Army Public School (APS)</td><td>Major Tariq</td><td class="tdr tdn">320,000</td><td class="tdc"><span class="badge bwa">Partial</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    
+    <!-- User Management (Placeholder) -->
+    <div class="scr" id="screen-users">
+      <div class="card">
+        <div class="ch"><span class="ct">Staff Accounts</span> <button class="btn ba"><i class="fa-solid fa-user-plus"></i> Add Staff</button></div>
+        <div class="cb" style="text-align:center;padding:40px;color:var(--t3)">User management list goes here.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Add Product Modal -->
+<div class="mover hidden" id="addProdModal">
+  <div class="modal">
+    <div class="mh"><div class="mt">Add New Product</div><button class="close-x" onclick="closeModal('addProdModal')"><i class="fa-solid fa-times"></i></button></div>
+    <div class="mb">
+      <div class="g2">
+        <div class="fg"><label class="fl">Product Name</label><input class="fc" type="text" placeholder="e.g. BHS Shirt"></div>
+        <div class="fg"><label class="fl">SKU / Barcode</label><input class="fc" type="text" placeholder="e.g. BHS-SH-M"></div>
+      </div>
+      <div class="g2">
+        <div class="fg"><label class="fl">Category</label><select class="fc"><option>Uniforms</option><option>Bags</option><option>Accessories</option></select></div>
+        <div class="fg"><label class="fl">School (Optional)</label><select class="fc"><option>None</option><option>BHS</option><option>APS</option></select></div>
+      </div>
+      <div class="g3">
+        <div class="fg"><label class="fl">Cost Price (Rs.)</label><input class="fc" type="number" placeholder="0.00"></div>
+        <div class="fg"><label class="fl">Selling Price (Rs.)</label><input class="fc" type="number" placeholder="0.00"></div>
+        <div class="fg"><label class="fl">Initial Stock</label><input class="fc" type="number" placeholder="0"></div>
+      </div>
+    </div>
+    <div class="mf">
+      <button class="btn bo" onclick="closeModal('addProdModal')">Cancel</button>
+      <button class="btn bp" onclick="closeModal('addProdModal')">Save Product</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// Logic for UI interactions
+function selectRole(el) {
+  document.querySelectorAll('.rpi').forEach(r => r.classList.remove('a'));
+  el.classList.add('a');
+}
+
+function showApp() {
+  document.getElementById('login').style.display = 'none';
+  document.getElementById('app').style.display = 'flex';
+}
+
+function go(screenId, title) {
+  // Update sidebar active state
+  document.querySelectorAll('.ni').forEach(n => n.classList.remove('active'));
+  const navItem = document.querySelector(`.ni[data-target="${screenId}"]`);
+  if(navItem) navItem.classList.add('active');
+
+  // Update screens
+  document.querySelectorAll('.scr').forEach(s => s.classList.remove('active'));
+  const target = document.getElementById('screen-' + screenId);
+  if(target) target.classList.add('active');
+
+  // Update Title
+  if(title) {
+    document.getElementById('pageTitle').innerText = title;
+  }
+}
+
+function openModal(id) {
+  document.getElementById(id).classList.remove('hidden');
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.add('hidden');
+}
+
+// Simple POS Cart Logic
+let cart = [];
+function addToCart(name, sku, price) {
+  const existing = cart.find(item => item.sku === sku);
+  if (existing) {
+    existing.qty++;
+  } else {
+    cart.push({name, sku, price, qty: 1});
+  }
+  renderCart();
+}
+
+function removeFromCart(sku) {
+  cart = cart.filter(item => item.sku !== sku);
+  renderCart();
+}
+
+function changeQty(sku, delta) {
+  const item = cart.find(i => i.sku === sku);
+  if (item) {
+    item.qty += delta;
+    if (item.qty <= 0) removeFromCart(sku);
+    else renderCart();
+  }
+}
+
+function renderCart() {
+  const tbody = document.getElementById('cartBody');
+  tbody.innerHTML = '';
+  let subtotal = 0;
+
+  cart.forEach(item => {
+    const itemTotal = item.price * item.qty;
+    subtotal += itemTotal;
+    
+    tbody.innerHTML += `
+      <div class="ci">
+        <div class="ci-em">📦</div>
+        <div class="ci-inf">
+          <div class="ci-n">${item.name}</div>
+          <div class="ci-s">${item.sku}</div>
+        </div>
+        <div class="qc">
+          <button class="qb" onclick="changeQty('${item.sku}', -1)">-</button>
+          <div class="qn">${item.qty}</div>
+          <button class="qb" onclick="changeQty('${item.sku}', 1)">+</button>
+        </div>
+        <div class="ci-p">Rs. ${itemTotal.toLocaleString()}</div>
+        <button class="rm-btn" onclick="removeFromCart('${item.sku}')"><i class="fa-solid fa-times"></i></button>
+      </div>
+    `;
+  });
+
+  document.getElementById('cartSub').innerText = 'Rs. ' + subtotal.toLocaleString();
+  document.getElementById('cartTotal').innerText = 'Rs. ' + subtotal.toLocaleString();
+}
+
+function checkout() {
+  if(cart.length === 0) return alert('Cart is empty!');
+  alert('Invoice Generated Successfully!');
+  cart = [];
+  renderCart();
+}
+
+// Initialize payment method toggle
+document.querySelectorAll('.pmo').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.pmo').forEach(b => b.classList.remove('sel'));
+    this.classList.add('sel');
+  });
+});
+</script>
+
+</body>
+</html>
